@@ -84,3 +84,6 @@
 | 10 |	Salami |
 | 11 |	Tomatoes |
 | 12 | Tomato Sauce |
+
+## ENTITY RELATIONSHIP DIAGRAM
+![image](https://user-images.githubusercontent.com/81607668/127271531-0b4da8c7-8b24-4a14-9093-0795c4fa037e.png)
