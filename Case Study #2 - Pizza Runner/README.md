@@ -64,12 +64,14 @@
 **Table 5: pizza_recipes**
 
 | pizza_id |	toppings |
+| -------- | --------- |
 | 1 |	1, 2, 3, 4, 5, 6, 8, 10 |
 | 2 |	4, 6, 7, 9, 11, 12 |
 
 **Table 6: pizza_toppings**
 
 | topping_id |	topping_name |
+| ---------- | ------------- |
 | 1 |	Bacon |
 | 2 |	BBQ Sauce |
 | 3 | Beef |
