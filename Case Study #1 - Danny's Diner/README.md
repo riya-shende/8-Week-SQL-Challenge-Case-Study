@@ -7,7 +7,7 @@ Danny wants to use the data to answer a few simple questions about his customers
 He plans on using these insights to help him decide whether he should expand the existing customer loyalty program.
 
 ## DATA SET
-Danny has shared with you 3 key datasets for this case study :
+There are 3 tables for this case study :
 - sales : The sales table captures all customer_id level purchases with an corresponding order_date and product_id information for when and what menu items were ordered.
 - menu : The menu table maps the product_id to the actual product_name and price of each menu item.
 - members : The final members table captures the join_date when a customer_id joined the beta version of the Danny’s Diner loyalty program.
