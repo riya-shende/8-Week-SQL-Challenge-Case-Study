@@ -71,3 +71,7 @@ LIMIT 1;
 #
 
 ### 5. Which item was the most popular for each customer?
+
+#
+
+### 6. Which item was purchased first by the customer after they became a member?
