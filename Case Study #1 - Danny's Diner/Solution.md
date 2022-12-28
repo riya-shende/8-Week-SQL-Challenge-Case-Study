@@ -23,6 +23,8 @@ GROUP BY s.customer_id;
 - Customer B spent $74.
 - Customer C spent $36.
 
+#
+
 ### 2. How many days has each customer visited the restaurant?
 
 ````sql
@@ -42,6 +44,8 @@ GROUP BY customer_id;
 - Customer A visited 4 times.
 - Customer B visited 6 times.
 - Customer C visited 2 times.
+
+#
 
 ### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 
@@ -63,3 +67,7 @@ LIMIT 1;
 
 
 - Most purchased item on the menu is ramen and it was purchased 8 times by all the customers. Yummy!
+
+#
+
+### 5. Which item was the most popular for each customer?
