@@ -50,8 +50,8 @@ GROUP BY customer_id;
 ### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 
 ````sql
-SELECT COUNT(s.product_id) AS count,
-	m.product_name AS most_purchased_item
+SELECT m.product_name AS most_purchased_item,
+       COUNT(s.product_id) AS count
 FROM sales AS s
 JOIN menu AS m
 ON s.product_id = m.product_id
@@ -61,9 +61,9 @@ LIMIT 1;
 ````
 
 #### Output :
-| count | most_purchased_item | 
-| ----- | ------------------- |
-| 8     | ramen               |
+| most_purchased_item | count |
+| ------------------- | ----- |
+| ramen               | 8     |
 
 
 - Most purchased item on the menu is ramen and it was purchased 8 times by all the customers. Yummy!
@@ -75,3 +75,75 @@ LIMIT 1;
 #
 
 ### 6. Which item was purchased first by the customer after they became a member?
+
+````sql
+SELECT s.customer_id,
+	   m.product_name
+FROM menu AS m
+JOIN sales AS s ON m.product_id = s.product_id
+JOIN members AS mem ON s.customer_id = mem.customer_id
+WHERE s.order_date >= mem.join_date
+GROUP BY customer_id
+ORDER BY customer_id;
+````
+
+#### Output : 
+| customer_id | product_name |
+| ----------- | ------------ |
+| A | curry |
+| B | sushi |
+
+- Customer A's first order after becoming the member was curry.
+- Customer B's first order after becoming the member was sushi.
+
+#
+
+### 7. Which item was purchased just before the customer became a member?
+
+````sql
+SELECT customer_id,
+       GROUP_CONCAT(product_name) AS ordered_food
+FROM (SELECT s.customer_id,
+	     m.product_name,
+             DENSE_RANK() OVER(PARTITION BY s.customer_id ORDER BY s.order_date DESC) AS rnk
+      FROM menu AS m
+      JOIN sales AS s ON m.product_id = s.product_id
+      JOIN members AS mem ON s.customer_id = mem.customer_id
+      WHERE s.order_date< mem.join_date) AS temp_table
+WHERE rnk = 1
+GROUP BY customer_id;
+````
+
+#### Output :
+| customer_id | ordered_food |
+| ----------- | ------------ |
+| A | sushi, curry |
+| B | sushi |
+
+- Customer A’s last order before becoming a member was sushi and curry.
+- Customer B's last order before becoming a member was sushi.
+
+#
+
+### 8. What is the total items and amount spent for each member before they became a member?
+
+````sql
+SELECT s.customer_id,
+	   COUNT(DISTINCT s.product_id) AS total_distinct_items,
+	   SUM(m.price) AS total_amount
+FROM menu AS m
+JOIN sales AS s ON m.product_id = s.product_id
+JOIN members AS mem ON s.customer_id = mem.customer_id
+WHERE s.order_date < mem.join_date
+GROUP BY s.customer_id
+ORDER BY s.customer_id;
+````
+
+#### Output :
+| customer_id |	total_distinct_items | total_amount |
+| ----------- | -------------------- | ------------ |
+| A | 2 | 25 |
+| B | 3 | 40 |
+
+- Before becoming members, Customer A spent $25 on 2 items.
+- Before becoming members, Customer B spent $40 on 2 items.
