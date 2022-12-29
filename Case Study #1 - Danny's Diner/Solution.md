@@ -242,9 +242,10 @@ SELECT s.customer_id,
        m.product_name,
        m.price,
        CASE
-			WHEN mem.join_date > s.order_date THEN 'Y'
+	    WHEN mem.join_date > s.order_date THEN 'N'
+            WHEN mem.join_date <= s.order_date THEN 'Y'
             ELSE 'N'
-		END AS member
+       END AS member
 FROM menu AS m
 LEFT JOIN sales AS s
 ON s.product_id = m.product_id
