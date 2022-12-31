@@ -2,7 +2,7 @@
 
 ![Case Studey 1 - Danny's Dinner](https://8weeksqlchallenge.com/images/case-study-designs/1.png)
 
-## Table of Contents
+# Table of Contents
 1. [Problem Statement](#problem-statement)
 2. [Data Set](#data-set)
 3. [Entity Relationship Diagram](#entity-relationship-diagram)
