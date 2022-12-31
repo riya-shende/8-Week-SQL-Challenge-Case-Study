@@ -108,7 +108,6 @@ LIMIT 1;
 | ------------------- | ----- |
 | ramen               | 8     |
 
-
 - Most purchased item on the menu is ramen and it was purchased 8 times by all the customers. Yummy!
 
 #
@@ -131,6 +130,9 @@ SELECT customer_id,
 FROM CTE_RANK
 WHERE rnk = 1;
 ````
+### Approach 
+- We create a CTE to rank the number of orders for each product by DESC order for each customer.
+- Then generate results where rank of product = 1 only as the most popular product for individual customer.
 
 ### Output
 | customer_id |	product_name | order_count |
@@ -142,7 +144,7 @@ WHERE rnk = 1;
 | C | ramen | 3 |
 		  
 - Customer A and C’s favourite item is ramen.
-- Customer B enjoys all items in the menu. He/she is a true foodie.
+- Customer B enjoys all items in the menu. 
 
 #
 
@@ -190,7 +192,9 @@ WHERE rnk = 1
 GROUP BY customer_id;
 ````
 ### Approach 
--
+- Use DENSE RANK by partitioning customer_id and ORDER BY DESC order_date to find out the order_date just before the customer became member
+- Filter order_date before join_date.
+- Then generate results where rank = 1 only as the purchased item just before the customer became a member.
 
 ### Output 
 | customer_id | ordered_food |
@@ -207,8 +211,8 @@ GROUP BY customer_id;
 
 ````sql
 SELECT s.customer_id,
-	   COUNT(DISTINCT s.product_id) AS total_distinct_items,
-	   SUM(m.price) AS total_amount
+       COUNT(DISTINCT s.product_id) AS total_distinct_items,
+       SUM(m.price) AS total_amount
 FROM menu AS m
 JOIN sales AS s ON m.product_id = s.product_id
 JOIN members AS mem ON s.customer_id = mem.customer_id
@@ -216,6 +220,11 @@ WHERE s.order_date < mem.join_date
 GROUP BY s.customer_id
 ORDER BY s.customer_id;
 ````
+### Approach
+- First, filter order_date before their join_date
+- Then, COUNT unique product_id and SUM the prices total spent before becoming member.
+- Join all the three tables since the common key was customer_id on both members and sales table.
+- And lastly, use GROUP BY clause to group the result set by customer_id column.
 
 ### Output 
 | customer_id |	total_distinct_items | total_amount |
@@ -245,6 +254,11 @@ GROUP BY customer_id)
 SELECT *
 FROM CTE_Customer_Point;
 ````
+### Approach
+- use CASE WHEN to create conditional statements.
+- If product_id = 1, then every $1 price multiply by 20 points.
+- All other product_id that is not 1, multiply $1 by 10 points.
+- we SUM the price, match it to the product_id and SUM the total_points.
 
 ### Output 
 | customer_id |	total_points |
