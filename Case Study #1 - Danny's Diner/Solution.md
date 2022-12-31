@@ -115,6 +115,35 @@ LIMIT 1;
 
 ### 5. Which item was the most popular for each customer?
 
+````sql
+WITH CTE_RANK AS(
+SELECT s.customer_id,
+	   m.product_name,
+	   COUNT(*) as order_count,
+	   DENSE_RANK() OVER(PARTITION BY s.customer_id ORDER BY COUNT(s.customer_id) DESC) AS rnk
+FROM sales AS s
+JOIN menu AS m
+ON s.product_id = m.product_id
+GROUP BY s.customer_id, m.product_name)
+SELECT customer_id,
+	   product_name,
+       order_count
+FROM CTE_RANK
+WHERE rnk = 1;
+````
+
+### Output
+| customer_id |	product_name | order_count |
+| ----------- | ------------ | ----------- |
+| A | ramen | 3 |
+| B | sushi | 2 |
+| B | curry | 2 |
+| B | ramen | 2 |
+| C | ramen | 3 |
+		  
+- Customer A and C’s favourite item is ramen.
+- Customer B enjoys all items in the menu. He/she is a true foodie.
+
 #
 
 ### 6. Which item was purchased first by the customer after they became a member?
