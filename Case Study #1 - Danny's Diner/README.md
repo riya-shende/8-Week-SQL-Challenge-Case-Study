@@ -7,9 +7,7 @@
 2. [Data Set](#data-set)
 3. [Entity Relationship Diagram](#entity-relationship-diagram)
 4. [Case Study Questions](#case-study-questions)
-5. [Solution](#solution)
-6. [Insights](#insights/Solution.md)
-
+5. [Solution and Insights](#solution)
 
 # Problem Statement
 Danny wants to use the data to answer a few simple questions about his customers, especially about their visiting patterns, how much money they’ve spent and also which menu items are their favourite. Having this deeper connection with his customers will help him deliver a better and more personalised experience for his loyal customers.
