@@ -232,6 +232,37 @@ FROM CTE_Customer_Point;
 
 ### 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
 
+````sql
+SELECT s.customer_id,
+	   SUM(
+		CASE
+		   WHEN m.product_name = 'sushi' THEN 20 * price
+		   WHEN order_date BETWEEN '2021-01-07' AND '2021-01-14' THEN 20 * price
+		   ELSE 10 * PRICE
+		END
+	      ) AS Points
+FROM sales AS s
+JOIN menu AS m ON s.product_id = m.product_id
+JOIN members AS mem ON mem.customer_id = s.customer_id
+GROUP BY s.customer_id
+ORDER BY s.customer_id;
+
+### Approach
+- Use SUM with CASE function
+- Join all the three tables
+- And lastly, use GROUP BY clause to group the result set by customer_id column.
+
+````
+### Output
+| customer_id | Points |
+| ----------- | -------|
+| A | 1370 |
+| B | 940 | 
+
+- Customer A has 1,370 points.
+- Customer B has 940 points.
+
+
 ## BONUS QUESTIONS
 
 ### 1. Recreate the table output using the available data with : customer_id, order_date, product_name, price, member (Y/N)
