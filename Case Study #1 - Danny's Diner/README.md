@@ -8,7 +8,7 @@
 3. [Entity Relationship Diagram](#entity-relationship-diagram)
 4. [Case Study Questions](#case-study-questions)
 5. [Solution](#solution)
-6. [Insights](#insights)
+6. ([#insights](https://github.com/riya-shende/8-Week-SQL-Challenge-Case-Study/blob/main/Case%20Study%20%231%20-%20Danny's%20Diner/Solution.md))
 
 
 # Problem Statement
