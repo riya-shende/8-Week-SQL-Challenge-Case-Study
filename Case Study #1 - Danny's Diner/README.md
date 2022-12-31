@@ -8,7 +8,7 @@
 3. [Entity Relationship Diagram](#entity-relationship-diagram)
 4. [Case Study Questions](#case-study-questions)
 5. [Solution](#solution)
-6. [Insights](#insights/solution.md/)
+6. [Insights](#insights/solution.md)
 
 
 # Problem Statement
