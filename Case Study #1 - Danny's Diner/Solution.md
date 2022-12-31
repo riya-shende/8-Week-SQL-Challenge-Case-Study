@@ -275,13 +275,13 @@ JOIN menu AS m ON s.product_id = m.product_id
 JOIN members AS mem ON mem.customer_id = s.customer_id
 GROUP BY s.customer_id
 ORDER BY s.customer_id;
+````
 
 ### Approach
 - Use SUM with CASE function
 - Join all the three tables
 - And lastly, use GROUP BY clause to group the result set by customer_id column.
 
-````
 ### Output
 | customer_id | Points |
 | ----------- | -------|
