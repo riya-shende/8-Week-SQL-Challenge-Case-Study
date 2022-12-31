@@ -306,7 +306,7 @@ ORDER BY s.customer_id;
 - Customer B has 940 points.
 
 
-## BONUS QUESTIONS
+## Bonus Question
 
 ### 1. Recreate the table output using the available data with : customer_id, order_date, product_name, price, member (Y/N)
 
