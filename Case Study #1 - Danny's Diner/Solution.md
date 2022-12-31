@@ -60,8 +60,8 @@ GROUP BY customer_id;
 SELECT customer_id,
 	   product_name
 FROM(SELECT s.customer_id,
-			m.product_name,
-			DENSE_RANK() OVER(PARTITION BY s.customer_id ORDER BY s.order_date, s.product_id) AS rnk
+	    m.product_name,
+	    DENSE_RANK() OVER(PARTITION BY s.customer_id ORDER BY s.order_date, s.product_id) AS rnk
 FROM sales AS s
 JOIN menu AS m
 ON s.product_id = m.product_id) AS temp_table
@@ -269,7 +269,7 @@ ORDER BY s.customer_id;
 
 ````sql
 SELECT s.customer_id,
-	   s.order_date,
+       s.order_date,
        m.product_name,
        m.price,
        CASE
@@ -315,10 +315,10 @@ WITH CTE_ranking AS
         m.product_name,
         m.price,
        CASE
-			WHEN mem.join_date > s.order_date THEN 'N'
+	    WHEN mem.join_date > s.order_date THEN 'N'
             WHEN mem.join_date <= s.order_date THEN 'Y'
             ELSE 'N'
-		END AS member
+       END AS member
 FROM menu AS m
 LEFT JOIN sales AS s
 ON s.product_id = m.product_id
@@ -326,10 +326,10 @@ LEFT JOIN members AS mem
 ON s.customer_id = mem.customer_id
 ORDER BY customer_id, order_date, product_name)
 SELECT *,
-		CASE
-			WHEN member = 'N' THEN null
+	CASE
+	    WHEN member = 'N' THEN null
             ELSE RANK() OVER(PARTITION BY customer_id, member ORDER BY order_date) 
-		END AS ranking
+	END AS ranking
 FROM CTE_Ranking;
 ````
 ### Output
